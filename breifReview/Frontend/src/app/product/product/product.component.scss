@@ -1,0 +1,94 @@
+.card{
+    padding:20px;
+    margin-top:5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.main{
+    margin-top:12%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+.btns{
+    margin-right: 5px;
+    margin-top: 90%;
+}
+.custom-btn{
+    margin:10%;
+}
+
+.icon{
+    height: 50px;
+    width: 50px;
+}
+.header{
+    color: #4F709C;
+    margin-top: 3%;
+}
+
+.alert{
+    margin-top: 5%;
+    padding-top:5%;
+    padding-left:5%;
+    margin-bottom:5%;
+}
+.action-buttons {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    border: none;
+}
+.picture{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 15%;
+    width: 70%;
+    object-fit: cover;
+}
+.ok{
+    margin-top: 3%;
+}
+.searchBar{
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width:80%;
+    margin-bottom: 5%;
+}
+#form {
+    float: left;
+    background-color: white;
+    margin-left: 10%;
+    width: 50%;
+    height: 30%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.searchButtons{
+    float:right;
+    width:30%;
+    margin-right: 10%;
+}
+  
+#query{
+    all: unset;
+    font: 16px system-ui;
+    color: black;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+}
+#query::placeholder {
+    color: gray;
+    opacity: 0.7; 
+}
+
+svg{
+    color: gray;
+    fill: currentColor;
+    width: 120%;
+    height: 120%;
+    padding: 10px;
+}
+ 

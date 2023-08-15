@@ -1,0 +1,39 @@
+.container{
+    margin-bottom: 5%;
+}
+.registerform{
+    display: flexbox;
+    flex-direction: row;
+    margin-left:5%;
+    margin-right:5%;
+    padding-top:3%;
+    padding-bottom:1%;
+  
+}
+.alert{
+    margin:3%;
+}
+.form-group{
+    padding-bottom: 2%;
+}
+.btn{
+    margin-top:3%;
+    border: 1px solid #4F709C;
+    color:#4F709C;
+}
+.btn:hover{
+    background-color: #4F709C;
+    color:white
+}
+.header{
+    margin-bottom: 5%;
+    color:#4F709C;
+}
+.container{
+    margin-top: 3%;
+    width:60%;
+    height:50%;
+    background-color: #D2E9E9;
+    
+}
+

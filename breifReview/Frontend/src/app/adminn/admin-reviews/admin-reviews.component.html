@@ -1,0 +1,29 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-center header">
+        <h3>Reviews</h3>
+    </div>
+    <div *ngIf="noReviews" class="alert alert-dark" role="alert">
+        No pending reviews!
+    </div>
+    <div class="main">
+        <div *ngFor="let review of reviews" #reviewItem>
+            <div class="card mb-3 shadow-lg p-3 mb-5 bg-white rounded container">
+                <div class="row d-flex">
+                    <div class="card-content col">
+                        <ng-container *ngIf="getProductDetails(review.productId) as product">
+                        <h5 class="productDetails">{{product.productCode + " | " +  product.productName }}</h5>
+                        </ng-container>
+                        <h5 class="user">{{review.user + " | " + review.rating }}</h5>
+                        <p class="card-text">{{review.review}}</p>
+                        <div class="d-flex justify-content-center align-items-bottom">
+                            <button type="button" class="btn btns btn-sm btn-outline-success"
+                                (click)="approveReview(review.reviewId)">Approve</button>
+                            <button type="button" class="btn btns btn-sm btn-outline-danger"
+                                (click)="rejectReview(review.reviewId)">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div *ngIf="added" class="alert alert-info" role="alert">
+  Your review was added!
+</div>
+
+<div class="card mb-3 shadow-lg p-3 mb-5  rounded container">
+  <div class="postreviewForm">
+    <div class="d-flex justify-content-center header">
+      <h2>Post Review</h2>
+    </div>
+
+    <form [formGroup]="reviewform" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">User</label>
+        <div class="col-sm-8">
+          <select class="form-control" formControlName="user">
+            <option value="{{username}}" selected>{{username}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Product Id</label>
+        <div class="col-sm-8">
+          <select class="form-control" formControlName="product_id">
+            <option value="{{productID}}" selected>{{productID}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Rating</label>
+        <div class="col-sm-8">
+          <select class="form-control" formControlName="rating"
+            [ngClass]="{ 'is-invalid': submitted && f['rating'].errors }">
+            <option value="">Select rating(1-5)</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <div *ngIf="submitted &&  f['rating'].errors" class="invalid-feedback">
+            <div *ngIf="f['rating'].errors['required']">Rating is required</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Review</label>
+        <div class="col-sm-8">
+          <textarea type="text" formControlName="review" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['review'].errors } "
+            placeholder="Post your thoughts..."></textarea>
+          <div *ngIf="submitted && f['review'].errors" class="invalid-feedback">
+            <div *ngIf="f['review'].errors['required']">Review is required</div>
+            <div *ngIf="f['review'].errors['minlength']">Review must be at least 40 characters</div>
+            <div *ngIf="f['review'].errors['maxlength']">Review must not exceed 200 characters</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group  d-flex justify-content-end">
+        <button type="submit" class="btn btn-outline-success col-4">Post</button>
+      </div>
+    </form>
+  </div>
+</div>

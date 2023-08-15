@@ -1,0 +1,96 @@
+<!-- Success Alert -->
+<div *ngIf="success">
+  <div class="alert alert-success" role="alert">
+    Successfully registered!! Now login.
+  </div>
+</div>
+
+<!-- User Exists -->
+<div *ngIf="userExits">
+  <div class="alert alert-info" role="alert">
+    User already exists! Please Log In.
+  </div>
+</div>
+
+<!-- An error occured -->
+<div *ngIf="errorOccured">
+  <div class="alert alert-danger" role="alert">
+    An error occured!
+  </div>
+</div>
+
+<div class="card mb-3 shadow-lg p-3 mb-5  rounded container">
+  <div class="register-form">
+    <div class="d-flex justify-content-center header">
+      <h2>Register</h2>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Full Name</label>
+        <div class="col-sm-8">
+          <input type="text" formControlName="name" class="form-control" placeholder="Enter your name"
+            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+          <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+            <div *ngIf="f['name'].errors['required']">Name is required</div>
+            <div *ngIf="f['name'].errors['pattern']">Only alphabets are allowed</div>
+            <div *ngIf="f['name'].errors['minlength']">Name must be at least 3 characters</div>
+            <div *ngIf="f['name'].errors['maxlength']">Name must not exceed 20 characters</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Email</label>
+        <div class="col-sm-8">
+          <input type="text" formControlName="email" class="form-control" placeholder="Enter your email"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">Email is required</div>
+            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Password</label>
+        <div class="col-sm-8">
+          <input type="password" formControlName="password" class="form-control"
+            placeholder="Password must be between 5-40 characters"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Password is required</div>
+            <div *ngIf="f['password'].errors['minlength']">
+              Password must be at least 5 characters
+            </div>
+            <div *ngIf="f['password'].errors['maxlength']">
+              Password must not exceed 40 characters
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Confirm Password</label>
+        <div class="col-sm-8">
+          <input type="password" formControlName="confirmPassword" class="form-control"
+            placeholder="Confirm your password"
+            [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }" />
+          <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+            <div *ngIf="f['confirmPassword'].errors['required']">
+              Please confirm your password!
+            </div>
+            <div *ngIf="f['confirmPassword'].errors['confirm']">
+              Password does not match!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-primary col-auto">Register</button>
+        <button type="button" (click)="onReset()" class="btn btn-outline-danger col-auto">Reset</button>
+      </div>
+      <div class="d-flex justify-content-center"><p>Existing users please <a routerLink="" (click)="goToLoginPage()"> Login.</a></p></div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="d-flex justify-content-center header">
+      <h3>Explore products here</h3>
+    </div>
+
+      <div class="searchBar">
+        <div>
+        <form id="form" [formGroup]="searchBar" (ngSubmit)="search()" role="search">
+          <input type="search" formControlName="search" id="query" name="q"
+           placeholder="Search..."
+           aria-label="Search through site content">
+          <button type="submit" class="btn btn-outline-secondary"><span class="material-symbols-outlined">
+            search
+          </span></button>
+        </form>
+        </div>
+
+        <div class="searchButtons btn-group">
+        <button type="button" class="btn btn-outline-secondary" (click)="openModal(filterModal)" title="Filter Products" >
+          <span class="material-symbols-outlined">
+            filter_alt
+          </span>
+        </button>
+        <button type="submit" class="btn btn-outline-secondary" (click)="openModal(sortModal)" title="Sort Produts"><span class="material-symbols-outlined">
+          sort_by_alpha
+        </span></button>
+        <button type="submit" class="btn btn-outline-secondary" (click)="askForReview()" title="Ask for Review"><span class="material-symbols-outlined">
+          library_books
+        </span></button>
+       
+        <button type="submit" class="btn btn-outline-secondary" (click)="getAllproducts()" title="Reset"><span class="material-symbols-outlined">
+          restart_alt
+        </span></button>
+
+      </div>
+      </div>
+      
+
+  <div *ngIf="isEmpty" class="picture">
+    <div class="d-flex justify-content-center">
+      <img height="300px" width="auto" max-width="70%" src="assets/images/no-products-found.jpg">
+    </div>
+    <div class="d-flex row-10 justify-content-center ok">
+      <button class="btn btn-outline-secondary" (click)="reset()">Ok</button>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-outline-secondary action-buttons" (click)="scrollToTop()" title="Scroll to Top">
+      <span class="material-symbols-outlined">
+        arrow_upward
+      </span>
+    </button>
+  </div>
+
+  <div class="main">
+    <div *ngFor="let product of products">
+      <div class="card mb-3 shadow-lg p-3 mb-5 bg-white rounded" style="max-width: 90%; min-width: 50%; min-height: 300px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img *ngIf="product.productImg==null" src="" class="product-image bd-placeholder-img card-img-left">
+            <img *ngIf="!(product.productImg==null)" src="{{product.productImg}}" class="img-fluid rounded-start"
+              height="90%" width="100%" style="object-fit: cover;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{product.productName +" | "+ product.brandName+" | "+product.productCode}}</h5>
+              <p class="card-text">{{product.productDescription |
+                slice:0:200}}{{product.productDescription.length>200? '...':''}}</p>
+              <div class="d-flex justify-content-center align-items-bottom">
+                <a routerLink="/product/reviews/{{product.productId}}"><button type="button"
+                    class="btn btns btn-sm btn-outline-success"
+                    (click)="viewReviews(product.productId)">View</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sort Modal -->
+  <ng-template #sortModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="sortModalLabel">Sort By</h5>
+      <button type="button" class="btn-close" (click)="modal.dismiss()" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="sortForm" (ngSubmit)="sortProducts()">
+        <div class="mb-3 form-check">
+          <input type="radio" class="form-check-input" id="nameRadio" formControlName="selection" value="name">
+          <label class="form-check-label" for="nameRadio">Name</label>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="radio" class="form-check-input" id="brandRadio" formControlName="selection" value="brand">
+          <label class="form-check-label" for="brandRadio">Brand</label>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="radio" class="form-check-input" id="codeRadio" formControlName="selection" value="code">
+          <label class="form-check-label" for="codeRadio">Code</label>
+        </div>
+        <button type="submit" (click)="modal.dismiss()" class="btn btn-outline-secondary">Filter</button>
+      </form>
+    </div>
+  </ng-template>
+
+  <!-- Filter Modal -->
+  <ng-template #filterModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="filterModalLabel">Filter Products</h5>
+      <button type="button" class="btn-close" (click)="modal.dismiss()" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="filterForm" (ngSubmit)="filterProducts()">
+        <div class="mb-3 form-check">
+          <input type="radio" class="form-check-input" id="nameRadio" formControlName="selection" value="name">
+          <label class="form-check-label" for="nameRadio">Name</label>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="radio" class="form-check-input" id="brandRadio" formControlName="selection" value="brand">
+          <label class="form-check-label" for="brandRadio">Brand</label>
+        </div>
+    
+        <div *ngIf="checked?.value==='name'" class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" placeholder="Name" formControlName="productName">
+        </div>
+
+        <div *ngIf="checked?.value==='brand'" class="mb-3">
+          <label for="brand" class="form-label">Brand</label>
+          <input type="text" class="form-control" id="brand" placeholder="Brand" formControlName="productBrand">
+        </div>
+
+        <button type="submit" (click)="modal.dismiss()" class="btn btn-outline-secondary">Search</button>
+      </form>
+    </div>
+  </ng-template>
+</div>
